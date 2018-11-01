@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block body %}
+    {{ object.category }} <br>
+    {{ object.title }} <br>
+    {{ object.description }} <br>
+    {{ object.size }} <br>
+    {{ object.price }} <br>
+    {{ object.bulk }} <br>
+    {% if object.image %}
+        <img src='{{ object.image.url }}' class='img-fluid' alt='Image'>
+    {% endif %}
+{% endblock body %}

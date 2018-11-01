@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block body %}
+<div class="card container">
+    <div class="card-body">
+        <div class='row'>
+            <div class="col-12 col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        {% if object.image %}
+                        <img src='{{ object.image.url }}' class='img-fluid' alt='Image'>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 col-md-6 col-lg-7 col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ object.category }} - {{ object.title }}</h4>
+                        <dl>
+                            <dt>Description</dt>
+                            <dd>
+                                <p class="card-text">{{ object.description | linebreaks }} </p>
+                            </dd>
+                            <dt>Size</dt>
+                            <dd>
+                                <p class="card-text">- {{ object.size }}</p>
+                            </dd>
+                            <dt>Price</dt>
+                            <dd>
+                                <p class="card-text">- KSh. {{ object.price }}</p>
+                            </dd>
+                        </dl>
+                        {% if object.bulk %}
+                        <p class="card-text text-danger">Buy {{ object.bulk }} or more pieces to enjoy discounted
+                            prices.</p>
+                        {% endif %}
+                        <a href="#" class="card-link">Add to cart</a>
+                        <a href="#" class="card-link">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">Updated {{ object.timestamp | timesince }} ago</div>
+</div>
+{% endblock body %}
