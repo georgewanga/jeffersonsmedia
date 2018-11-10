@@ -1,0 +1,8 @@
+<form method="POST" action="{% url 'accounts:usr_login' %}">{% csrf_token %}
+    {% if next_url %}
+    <input type="hidden" name="next" value="{{next_url}}" >
+    {% endif %}
+    {{form}}
+    <button class="btn btn-primary btn-block mt-2" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+</form>

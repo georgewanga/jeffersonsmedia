@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block body %}
+{% url 'cart:checkout' as checkout_url %}
+<div class="mx-auto col-12 col-sm-12 col-md-11 col-lg-9 col-xl-7">
+    <h1>cart 1</h1>
+    {% if cart.products.exists %}
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in cart.products.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ product.category }}</td>
+                <td>
+                    <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                </td>
+                <td>{{ product.price }}</td>
+                <td>
+                    {% include 'products/snippets/update_cart.html' with product=product cart=cart in_cart=True %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="text-right" colspan="3">
+                    <b> Subtotal : </b>
+                </td>
+                <td colspan="2">{{ cart.subtotal }}</td>
+            </tr>
+            <tr>
+                <td class="text-right" colspan="3">
+                    <b> Total : </b>
+                </td>
+                <td colspan="2">{{ cart.total }}</td>
+            </tr>
+            <tr>
+                <td class="text-right" colspan="3"></td>
+                <td colspan="2"><a class="btn btn-sm btn-block btn-success" href="{{ checkout_url }}"> Ckeckout </a></td>
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <div class="container-fluid">
+        <hr>
+        <p class="lead text-center"> Cart is Empty </p>
+        <hr>
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

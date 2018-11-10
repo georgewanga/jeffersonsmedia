@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block body %}
+<form method="POST">
+    {%  csrf_token %}
+    {{form}}
+    
+    <button class="btn btn-primary btn-block mt-2" type="submit"> Register </button>
+</form>
+{% endblock body %}

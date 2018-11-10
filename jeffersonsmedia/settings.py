@@ -127,6 +127,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static','media_root')
 
 INSTALLED_APPS += [
-    'dashboard.apps.DashboardConfig',
     'products.apps.ProductsConfig',
+    'search.apps.SearchConfig',
+    'tags.apps.TagsConfig',
+    'carts.apps.CartsConfig',
+    'orders.apps.OrdersConfig',
+    'accounts.apps.AccountsConfig',
+    'billing.apps.BillingConfig',
 ]
+
+LOGOUT_REDIRECT_URL = 'accounts:usr_login'

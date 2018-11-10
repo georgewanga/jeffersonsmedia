@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block body %}
+{% url 'products:list' as products_list %}
+
+<div class="col-9 col-sm-7 col-md-6 col-lg-5 col-xl-4 mx-auto py-3">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-auto">
+                    <a class="image-fluid mx-auto" href="{{products_list}}">
+                        <img src="{% static 'images/logo99.png' %}" height="50"alt="Logo">
+                    </a>
+                </div>
+                <div class="col text-left">
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% include 'accounts/snippets/form.html' with form=form %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

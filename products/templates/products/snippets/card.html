@@ -1,14 +1,21 @@
 {% load static %}
-<div class="text-center col col-6 col-sm-4 col-md-3 col-lg-2">
-    {% if instance.image %}
-    <a href='{{ instance.get_absolute_url }}'>
-        <div class="container">
-            <img class="rounded" src='{{ instance.image.url }}' alt="{{ instance.title }} logo" style="height:100px;">
+<div class="mx-auto mb-4 col-4 col-sm-3 col-md-2 col-lg-2">
+    <strong class="card-title"> {{ instance.category }}<small> | {{ instance.title }}</small></strong><br>
+    <div class='row no-gutters'>
+        <div class="text-centre mx-auto col-5 no-gutters">
+            {% if instance.image %}
+            <a href='{{ instance.get_absolute_url }}'>
+                <img class="img-thumbnail" src='{{ instance.image.url }}' alt="{{ instance.title }} logo" style="max-block-size: 80px">
+            </a>
+            {% endif %}
         </div>
-    </a>
-    {% endif %}
-    <h4 class="card-title">{{ instance.category }}</h4>
-    <h5 class="card-title">{{ instance.title }}</h5>
-    <p class="card-text">{{ instance.description|truncatewords:14 }}</p>
-    <a href="#" class="card-link">Add to cart</a>
+        <div class="mx-auto col-7 no-gutters">
+            <small class="card-subtitle mb-2 text-muted">
+                ({{ instance.size }})<br> </small>
+            <p class="card-text">
+                {{ instance.description|truncatewords:4 }} </p>
+        </div>
+    </div>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
 </div>

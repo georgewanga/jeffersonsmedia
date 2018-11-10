@@ -33,11 +33,9 @@
                             </dd>
                         </dl>
                         {% if object.bulk %}
-                        <p class="card-text text-danger">Buy {{ object.bulk }} or more pieces to enjoy discounted
-                            prices.</p>
+                        <pre class="card-text text-primary">Buy <mark>{{ object.bulk }}</mark> or more pieces to enjoy discounted prices.</pre>
                         {% endif %}
-                        <a href="#" class="card-link">Add to cart</a>
-                        <a href="#" class="card-link">Back</a>
+                        {% include 'products/snippets/update_cart.html' with product=object cart=cart %}
                     </div>
                 </div>
             </div>

@@ -18,12 +18,18 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('dashboard/', include('dashboard.urls',namespace='dashboard')),
+    path('search/', include('search.urls',namespace='search')),
+    path('cart/', include('carts.urls',namespace='cart')),
+    path('orders/', include('orders.urls',namespace='orders')),
     path('products/', include('products.urls',namespace='products')),
+    path('accounts/', include('accounts.urls',namespace='accounts')),
+    path('billing/', include('billing.urls',namespace='billing')),
+    path('logout/', LogoutView.as_view(), name='usr_logout'),
     path('admin/', admin.site.urls),
-    path('', include('products.urls')),
+    path('', include('products.urls',namespace='home')),
 ]
 
 

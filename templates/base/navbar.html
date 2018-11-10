@@ -1,51 +1,67 @@
 {% load static %}
 {% url 'products:list' as products_list %}
-{% url 'dashboard:home_page' as dash_home %}
-{% url 'dashboard:prod_registration' as prod_registration %}
-{% url 'dashboard:usr_registration' as usr_registration %}
-{% url 'dashboard:usr_login' as usr_login %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{products_list}}">
-        {% if comcompany_name %} {{company_name}} {% else %} Jeffersons Media {% endif %}
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+{% url 'products:add_item' as add_item %}
+{% url 'accounts:usr_registration' as usr_registration %}
+{% url 'accounts:usr_login' as usr_login %}
+{% url 'usr_logout' as usr_logout %}
+{% url 'cart:home' as cart_url %}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if request.path == products_list %}active{% endif %}">
-                <a class="nav-link" href="{{products_list}}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item {% if request.path == dash_home %}active{% endif %}">
-                <a class="nav-link" href="{{dash_home}}">Dashboard</a>
-            </li>
-            <li class="nav-item {% if request.path == products_list %}active{% endif %}">
-                <a class="nav-link" href="{{products_list}}">Products</a>
-            </li>
-            <li class="nav-item {% if request.path == prod_registration %}active{% endif %}">
-                <a class="nav-link" href="{{prod_registration}}">Add Product</a>
-            </li>
-            <li class="nav-item {% if request.path == usr_registration %}active{% endif %}">
-                <a class="nav-link" href="{{usr_registration}}">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin">admin</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href=#></span>logout</a>
-            </li>
-            {% else %}
-            <li class="nav-item {% if request.path == usr_login %}active{% endif %}">
-                <a class="nav-link" href="{{usr_login}}"> Login </a>
-            </li>
-            {% endif %}
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="navbar-header ml-md-2 mx-auto">
+            <a class="navbar-brand" href="{{products_list}}">
+                <img src="{% static 'images/logo99.png' %}" height="40" class="image-fluid" alt="Logo">
+                <img src="{% static 'images/brand.jpeg' %}" height="40" class="image-fluid ml-2 ml-lg-3" alt="Brand">
+            </a>
+        </div>
+        <div class="container-fluid mx-auto">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-link {% if request.path == products_list %}active{% endif %}">
+                        <a href="{{products_list}}">Products</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mx-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-link {% if request.path == usr_logout %}active{% endif %}">
+                        <a href="{{usr_logout}}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-link {% if request.path == usr_registration %}active{% endif %}">
+                        <a href="{{usr_registration}}">
+                            <span class="glyphicon glyphicon-user"></span>
+                            SignUp
+                        </a>
+                    </li>
+                    <li class="nav-link {% if request.path == usr_login %}active{% endif %}">
+                        <a href="{{usr_login}}">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Login
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav mx-auto">
+                    {% if request.session.cart_items %}
+                    <li class="nav-link {% if request.path == cart_url %}active{% endif %}">
+                        <a href="{{cart_url}}">
+                            <span class="badge badge-primary badge-pill">
+                                {{ request.session.cart_items }}
+                            </span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% include 'search/snippets/search_form.html'%}
+            </div>
+        </div>
     </div>
 </nav>
